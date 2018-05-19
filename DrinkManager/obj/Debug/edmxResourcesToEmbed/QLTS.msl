@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QUANLYTRASUAModelStoreContainer" CdmEntityContainer="QLTSEntities">
+    <EntitySetMapping Name="BILLS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.BILL">
+        <MappingFragment StoreEntitySet="BILLS">
+          <ScalarProperty Name="bid" ColumnName="bid" />
+          <ScalarProperty Name="cid" ColumnName="cid" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="cashier" ColumnName="cashier" />
+          <ScalarProperty Name="purchasedate" ColumnName="purchasedate" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMERS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.CUSTOMER">
+        <MappingFragment StoreEntitySet="CUSTOMERS">
+          <ScalarProperty Name="cid" ColumnName="cid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="info" ColumnName="info" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETAIL_BILLS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.DETAIL_BILLS">
+        <MappingFragment StoreEntitySet="DETAIL_BILLS">
+          <ScalarProperty Name="dbid" ColumnName="dbid" />
+          <ScalarProperty Name="bid" ColumnName="bid" />
+          <ScalarProperty Name="iid" ColumnName="iid" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETAIL_SHIPMENTS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.DETAIL_SHIPMENTS">
+        <MappingFragment StoreEntitySet="DETAIL_SHIPMENTS">
+          <ScalarProperty Name="dsid" ColumnName="dsid" />
+          <ScalarProperty Name="shid" ColumnName="shid" />
+          <ScalarProperty Name="iid" ColumnName="iid" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLOYEES">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.EMPLOYEE">
+        <MappingFragment StoreEntitySet="EMPLOYEES">
+          <ScalarProperty Name="eid" ColumnName="eid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="hiredate" ColumnName="hiredate" />
+          <ScalarProperty Name="tserviceid" ColumnName="tserviceid" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ITEMS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.ITEM">
+        <MappingFragment StoreEntitySet="ITEMS">
+          <ScalarProperty Name="iid" ColumnName="iid" />
+          <ScalarProperty Name="titemid" ColumnName="titemid" />
+          <ScalarProperty Name="nameitem" ColumnName="nameitem" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SHIPMENTS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.SHIPMENT">
+        <MappingFragment StoreEntitySet="SHIPMENTS">
+          <ScalarProperty Name="shid" ColumnName="shid" />
+          <ScalarProperty Name="tradingdate" ColumnName="tradingdate" />
+          <ScalarProperty Name="censor" ColumnName="censor" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUPPLIERS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.SUPPLIER">
+        <MappingFragment StoreEntitySet="SUPPLIERS">
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TABLES">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.TABLE">
+        <MappingFragment StoreEntitySet="TABLES">
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="floor" ColumnName="floor" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPE_ITEMS">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.TYPE_ITEMS">
+        <MappingFragment StoreEntitySet="TYPE_ITEMS">
+          <ScalarProperty Name="titemid" ColumnName="titemid" />
+          <ScalarProperty Name="typeitem" ColumnName="typeitem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPE_SERVICES">
+      <EntityTypeMapping TypeName="QUANLYTRASUAModel.TYPE_SERVICES">
+        <MappingFragment StoreEntitySet="TYPE_SERVICES">
+          <ScalarProperty Name="tserviceid" ColumnName="tserviceid" />
+          <ScalarProperty Name="typeservice" ColumnName="typeservice" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

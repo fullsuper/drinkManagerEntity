@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLYTRASUAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BILLS">
+    <Key>
+      <PropertyRef Name="bid" />
+    </Key>
+    <Property Name="bid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cid" Type="int" />
+    <Property Name="price" Type="bigint" />
+    <Property Name="cashier" Type="int" />
+    <Property Name="purchasedate" Type="date" />
+    <Property Name="tid" Type="int" />
+  </EntityType>
+  <EntityType Name="CUSTOMERS">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="info" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="DETAIL_BILLS">
+    <Key>
+      <PropertyRef Name="dbid" />
+    </Key>
+    <Property Name="dbid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bid" Type="int" />
+    <Property Name="iid" Type="int" />
+    <Property Name="amount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DETAIL_SHIPMENTS">
+    <Key>
+      <PropertyRef Name="dsid" />
+    </Key>
+    <Property Name="dsid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shid" Type="int" />
+    <Property Name="iid" Type="int" />
+    <Property Name="amount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EMPLOYEES">
+    <Key>
+      <PropertyRef Name="eid" />
+    </Key>
+    <Property Name="eid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="hiredate" Type="date" />
+    <Property Name="tserviceid" Type="int" />
+    <Property Name="phone" Type="bigint" />
+    <Property Name="salary" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ITEMS">
+    <Key>
+      <PropertyRef Name="iid" />
+    </Key>
+    <Property Name="iid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titemid" Type="int" />
+    <Property Name="nameitem" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="price" Type="bigint" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SHIPMENTS">
+    <Key>
+      <PropertyRef Name="shid" />
+    </Key>
+    <Property Name="shid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tradingdate" Type="date" />
+    <Property Name="censor" Type="int" />
+    <Property Name="sid" Type="int" />
+    <Property Name="rate" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SUPPLIERS">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="100" />
+    <Property Name="phone" Type="bigint" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TABLES">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="floor" Type="int" />
+    <Property Name="position" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TYPE_ITEMS">
+    <Key>
+      <PropertyRef Name="titemid" />
+    </Key>
+    <Property Name="titemid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="typeitem" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="TYPE_SERVICES">
+    <Key>
+      <PropertyRef Name="tserviceid" />
+    </Key>
+    <Property Name="tserviceid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="typeservice" Type="nvarchar" MaxLength="30" />
+    <Property Name="detail" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_bill">
+    <End Role="BILLS" Type="Self.BILLS" Multiplicity="0..1" />
+    <End Role="DETAIL_BILLS" Type="Self.DETAIL_BILLS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BILLS">
+        <PropertyRef Name="bid" />
+      </Principal>
+      <Dependent Role="DETAIL_BILLS">
+        <PropertyRef Name="bid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bill_cus">
+    <End Role="CUSTOMERS" Type="Self.CUSTOMERS" Multiplicity="0..1" />
+    <End Role="BILLS" Type="Self.BILLS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERS">
+        <PropertyRef Name="cid" />
+      </Principal>
+      <Dependent Role="BILLS">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bill_emp">
+    <End Role="EMPLOYEES" Type="Self.EMPLOYEES" Multiplicity="0..1" />
+    <End Role="BILLS" Type="Self.BILLS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEES">
+        <PropertyRef Name="eid" />
+      </Principal>
+      <Dependent Role="BILLS">
+        <PropertyRef Name="cashier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bill_table">
+    <End Role="TABLES" Type="Self.TABLES" Multiplicity="0..1" />
+    <End Role="BILLS" Type="Self.BILLS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TABLES">
+        <PropertyRef Name="tid" />
+      </Principal>
+      <Dependent Role="BILLS">
+        <PropertyRef Name="tid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ds_item">
+    <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+    <End Role="DETAIL_SHIPMENTS" Type="Self.DETAIL_SHIPMENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ITEMS">
+        <PropertyRef Name="iid" />
+      </Principal>
+      <Dependent Role="DETAIL_SHIPMENTS">
+        <PropertyRef Name="iid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ds_shipment">
+    <End Role="SHIPMENTS" Type="Self.SHIPMENTS" Multiplicity="0..1" />
+    <End Role="DETAIL_SHIPMENTS" Type="Self.DETAIL_SHIPMENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SHIPMENTS">
+        <PropertyRef Name="shid" />
+      </Principal>
+      <Dependent Role="DETAIL_SHIPMENTS">
+        <PropertyRef Name="shid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_emp_typeservice">
+    <End Role="TYPE_SERVICES" Type="Self.TYPE_SERVICES" Multiplicity="0..1" />
+    <End Role="EMPLOYEES" Type="Self.EMPLOYEES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPE_SERVICES">
+        <PropertyRef Name="tserviceid" />
+      </Principal>
+      <Dependent Role="EMPLOYEES">
+        <PropertyRef Name="tserviceid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_item">
+    <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="0..1" />
+    <End Role="DETAIL_BILLS" Type="Self.DETAIL_BILLS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ITEMS">
+        <PropertyRef Name="iid" />
+      </Principal>
+      <Dependent Role="DETAIL_BILLS">
+        <PropertyRef Name="iid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_item_typeitem">
+    <End Role="TYPE_ITEMS" Type="Self.TYPE_ITEMS" Multiplicity="0..1" />
+    <End Role="ITEMS" Type="Self.ITEMS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPE_ITEMS">
+        <PropertyRef Name="titemid" />
+      </Principal>
+      <Dependent Role="ITEMS">
+        <PropertyRef Name="titemid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_shipment_emp">
+    <End Role="EMPLOYEES" Type="Self.EMPLOYEES" Multiplicity="0..1" />
+    <End Role="SHIPMENTS" Type="Self.SHIPMENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEES">
+        <PropertyRef Name="eid" />
+      </Principal>
+      <Dependent Role="SHIPMENTS">
+        <PropertyRef Name="censor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_shipment_sup">
+    <End Role="SUPPLIERS" Type="Self.SUPPLIERS" Multiplicity="0..1" />
+    <End Role="SHIPMENTS" Type="Self.SHIPMENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUPPLIERS">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="SHIPMENTS">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QUANLYTRASUAModelStoreContainer">
+    <EntitySet Name="BILLS" EntityType="Self.BILLS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETAIL_BILLS" EntityType="Self.DETAIL_BILLS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETAIL_SHIPMENTS" EntityType="Self.DETAIL_SHIPMENTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEES" EntityType="Self.EMPLOYEES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ITEMS" EntityType="Self.ITEMS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SHIPMENTS" EntityType="Self.SHIPMENTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SUPPLIERS" EntityType="Self.SUPPLIERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TABLES" EntityType="Self.TABLES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TYPE_ITEMS" EntityType="Self.TYPE_ITEMS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TYPE_SERVICES" EntityType="Self.TYPE_SERVICES" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_bill" Association="Self.FK_bill">
+      <End Role="BILLS" EntitySet="BILLS" />
+      <End Role="DETAIL_BILLS" EntitySet="DETAIL_BILLS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bill_cus" Association="Self.FK_bill_cus">
+      <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+      <End Role="BILLS" EntitySet="BILLS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bill_emp" Association="Self.FK_bill_emp">
+      <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
+      <End Role="BILLS" EntitySet="BILLS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bill_table" Association="Self.FK_bill_table">
+      <End Role="TABLES" EntitySet="TABLES" />
+      <End Role="BILLS" EntitySet="BILLS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ds_item" Association="Self.FK_ds_item">
+      <End Role="ITEMS" EntitySet="ITEMS" />
+      <End Role="DETAIL_SHIPMENTS" EntitySet="DETAIL_SHIPMENTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ds_shipment" Association="Self.FK_ds_shipment">
+      <End Role="SHIPMENTS" EntitySet="SHIPMENTS" />
+      <End Role="DETAIL_SHIPMENTS" EntitySet="DETAIL_SHIPMENTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_emp_typeservice" Association="Self.FK_emp_typeservice">
+      <End Role="TYPE_SERVICES" EntitySet="TYPE_SERVICES" />
+      <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_item" Association="Self.FK_item">
+      <End Role="ITEMS" EntitySet="ITEMS" />
+      <End Role="DETAIL_BILLS" EntitySet="DETAIL_BILLS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_item_typeitem" Association="Self.FK_item_typeitem">
+      <End Role="TYPE_ITEMS" EntitySet="TYPE_ITEMS" />
+      <End Role="ITEMS" EntitySet="ITEMS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_shipment_emp" Association="Self.FK_shipment_emp">
+      <End Role="EMPLOYEES" EntitySet="EMPLOYEES" />
+      <End Role="SHIPMENTS" EntitySet="SHIPMENTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_shipment_sup" Association="Self.FK_shipment_sup">
+      <End Role="SUPPLIERS" EntitySet="SUPPLIERS" />
+      <End Role="SHIPMENTS" EntitySet="SHIPMENTS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
